@@ -18,14 +18,19 @@ TimeoutStopSec=70
 ExecStartPre=/bin/mkdir -p config
 ExecStartPre=/bin/rm -f %t/kitchenowl-app.pid %t/kitchenowl-app.ctr-id
 ExecStartPre=-runagent discover-smarthost
+ExecStartPre=/bin/sh -c 'grep -q JWT_SECRET_KEY environment || echo "JWT_SECRET_KEY=`openssl rand -base64 32`" >> environment'
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/kitchenowl-app.pid \
     --cidfile %t/kitchenowl-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/kitchenowl.pod-id --replace -d --name  kitchenowl-app \
-    --volume kitchenowl-app:/var/www/html/:Z \
-    --volume ./config:/tmp:Z \
-    --env=NGINX_* \
+    --volume kitchenowl-app:/data:Z \
     --env 'CONFIG_DATABASE_URI="postgresql://postgres:Nethesis,1234@127.0.0.1:5432/kitchenowl"' \
-    ${NGINX_IMAGE}
+    --env JWT_SECRET_KEY=${JWT_SECRET_KEY} \
+    --env DB_DRIVER=postgresql \
+    --env DB_HOST=db \
+    --env DB_NAME=kitchenowl \
+    --env DB_USER=postgres \
+    --env DB_PASSWORD=Nethesis,1234 \
+    ${KITCHENOWL_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/kitchenowl-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP kitchenowl-app
 SyslogIdentifier=%u
