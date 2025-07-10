@@ -23,10 +23,9 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/kitchenowl-app.pid \
     --cidfile %t/kitchenowl-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/kitchenowl.pod-id --replace -d --name  kitchenowl-app \
     --volume kitchenowl-app:/data:Z \
-    --env 'CONFIG_DATABASE_URI="postgresql://postgres:Nethesis,1234@127.0.0.1:5432/kitchenowl"' \
     --env JWT_SECRET_KEY=${JWT_SECRET_KEY} \
     --env DB_DRIVER=postgresql \
-    --env DB_HOST=db \
+    --env DB_HOST=postgresql-app \
     --env DB_NAME=kitchenowl \
     --env DB_USER=postgres \
     --env DB_PASSWORD=Nethesis,1234 \
