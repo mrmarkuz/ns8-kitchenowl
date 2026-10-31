@@ -21,7 +21,7 @@ container=$(buildah from scratch)
 # Reuse existing nodebuilder-kitchenowl container, to speed up builds
 if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-kitchenowl; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-kitchenowl -v "${PWD}:/usr/src:Z" docker.io/library/node:lts
+    buildah from --name nodebuilder-kitchenowl -v "${PWD}:/usr/src:Z" docker.io/library/node:24.22.2-slim
 fi
 
 echo "Build static UI files with node..."
@@ -44,6 +44,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
+	--label="org.nethserver.min-core=3.12.4-0" \
     --label="org.nethserver.images=docker.io/postgres:15.10-alpine3.19 docker.io/tombursch/kitchenowl:v0.7.10" \
     "${container}"
 # Commit the image

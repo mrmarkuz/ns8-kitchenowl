@@ -1,19 +1,23 @@
 {
-  "name": "kitchenowl",
+  "name": "KitchenOwl",
   "description": {
-    "en": "My kitchenowl module"
+    "en": "KitchenOwl is a smart, open-source, and self-hosted grocery list, recipe manager, and meal planner designed for households and small groups",
+    "de": "KitchenOwl ist eine intelligente, quelloffene und selbst gehostete Lösung für Einkaufslisten, Rezeptverwaltung und Essensplanung, die für Haushalte und kleine Gruppen konzipiert wurde",
+    "fr": "KitchenOwl est un outil intelligent, open source et auto-hébergé permettant de gérer des listes de courses, des recettes et la planification des repas, conçu pour les foyers et les petits groupes",
+    "it": "KitchenOwl è una soluzione intelligente, open source e autospostata per gestire liste della spesa, ricette e pianificazione dei pasti, pensata per nuclei familiari e piccoli gruppi",
+    "es": "KitchenOwl es una herramienta inteligente, de código abierto y autohospedada que permite gestionar listas de la compra, recetas y la planificación de comidas, diseñada para hogares y grupos pequeños"
   },
-  "categories": [],
+  "categories": ["collaboration"],
   "authors": [
     {
-      "name": "Name Surname",
-      "email": "author@yourmail.org"
+      "name": "Markus Neuberger",
+      "email": "dev@markusneuberger.at"
     }
   ],
   "docs": {
-    "documentation_url": "https://docs.kitchenowl.com/",
-    "bug_url": "https://github.com/NethServer/dev",
-    "code_url": "https://github.com/author/ns8-kitchenowl"
+    "documentation_url": "https://docs.kitchenowl.org/latest/",
+    "bug_url": "https://community.nethserver.org",
+    "code_url": "https://github.com/mrmarkuz/ns8-kitchenowl"
   },
-  "source": "ghcr.io/nethserver/kitchenowl"
+  "source": "ghcr.io/mrmarkuz/kitchenowl"
 }
