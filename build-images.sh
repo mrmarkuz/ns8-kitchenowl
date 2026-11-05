@@ -21,7 +21,7 @@ container=$(buildah from scratch)
 # Reuse existing nodebuilder-kitchenowl container, to speed up builds
 if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-kitchenowl; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-kitchenowl -v "${PWD}:/usr/src:Z" docker.io/library/node:24.22.2-slim
+    buildah from --name nodebuilder-kitchenowl -v "${PWD}:/usr/src:Z" docker.io/library/node:26.12.1-slim
 fi
 
 echo "Build static UI files with node..."
