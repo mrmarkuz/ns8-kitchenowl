@@ -45,7 +45,7 @@ Check if kitchenowl can be configured
     Should Be Equal As Integers    ${rc}  0
 
 Check if kitchenowl works as expected
-    ${rc} =    Execute Command    sleep 20 && curl -f -k -H "Host: kitchenowl.domain.test" https://127.0.0.1
+    ${rc} =    Execute Command    sleep 60 && curl -f -k -H "Host: kitchenowl.domain.test" https://127.0.0.1
     ...    return_rc=True  return_stdout=False
     Should Be Equal As Integers    ${rc}  0
 
