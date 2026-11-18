@@ -44,8 +44,8 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-	--label="org.nethserver.min-core=3.12.4-0" \
-    --label="org.nethserver.images=docker.io/postgres:15.19-alpine docker.io/tombursch/kitchenowl:v0.8.1" \
+    --label="org.nethserver.min-core=3.12.4-0" \
+    --label="org.nethserver.images=docker.io/postgres:15.20-alpine docker.io/tombursch/kitchenowl:v0.8.1" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
