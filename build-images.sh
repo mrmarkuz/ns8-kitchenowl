@@ -14,14 +14,17 @@ images=()
 repobase="${REPOBASE:-ghcr.io/nethserver}"
 # Configure the image name
 reponame="kitchenowl"
-
+# Node.js 25+ no longer ships Corepack, install it from npm
+# renovate: datasource=npm packageName=corepack
+corepack_version=0.36.0
 # Create a new empty container image
 container=$(buildah from scratch)
 
 # Reuse existing nodebuilder-kitchenowl container, to speed up builds
 if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-kitchenowl; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-kitchenowl -v "${PWD}:/usr/src:Z" docker.io/library/node:24.22.3-slim
+    buildah from --name nodebuilder-kitchenowl -v "${PWD}:/usr/src:Z" docker.io/library/node:26.13.1-slim
+    buildah run nodebuilder-kitchenowl sh -c "npm install -g corepack@${corepack_version} && corepack enable"
 fi
 
 echo "Build static UI files with node..."
